@@ -1,0 +1,26 @@
+/* CSS declarations go here */
+
+.radio {
+  display: inline;
+  margin: 0;
+  padding: 0;
+}
+
+.radio input {
+  display: none;
+}
+
+.label-text {
+  text-transform: capitalize;
+  display: block;
+  padding: 5px;
+  margin: 5px 0;
+  border: 1px #ddd solid;
+
+  border-radius: 5px;
+}
+
+:checked + .label-text {
+  border-color: darken(#428bca, 5%);
+  background-color: lighten(#428bca, 40%)
+}

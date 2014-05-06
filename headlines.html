@@ -1,0 +1,164 @@
+<head>
+  <title>headlines</title>
+</head>
+
+<body>
+</body>
+
+<template name="layout">
+  <div class="container">
+    {{> yield}}
+  </div>
+</template>
+
+<template name="admin">
+  <h1>Add Question</h1>
+
+  <form>
+    <label>Canonical Name</label>
+    <input type="text" name="name" class="form-control" /> <br />
+
+    <table class="table">
+      <tr><th>News Source</th><th>Headline</th></tr>
+      {{#each sources}}
+        <tr>
+          <td>{{name}}</td>
+          <td>
+            <textarea name="headlines.{{_id}}" class="form-control"></textarea>
+          </td>
+        </tr>
+      {{/each}}
+    </table>
+
+    <input type="submit" value="Save" class="btn btn-primary" />
+  </form>
+
+  <h1>Add Sources</h1>
+  <input type="text" name="sourceName" class="new-source-name" />
+  <a href="#" class="btn btn-sm btn-default add-source">+ Add News Source</a>
+
+  <h1>Existing Questions</h1>
+  <table>
+    <tr><th>Name</th><th>Headlines</th><th>Actions</th></tr>
+    {{#each questions}}
+      <tr>
+        <td>{{name}}</td>
+        <td>
+          <ul class="list-unstyled">
+            {{#each headlines}}
+              <li>{{sourceName sourceId}}: {{text}}</li>
+            {{/each}}
+          </ul>
+        </td>
+        <td><a href="#" class="delete-question">Delete</a></td>
+      </tr>
+    {{/each}}
+  </table>
+</template>
+
+<template name="survey">
+  <h1>Headline Survey</h1>
+
+  <form>
+    {{#each questions}}
+      {{> question}}
+    {{/each}}
+
+    <h3>Help us out with some demographic data!</h3>
+
+    <label>Age</label> <br />
+    <input type="number" name="age" /> <br /> <br />
+
+    <label>Political Party Affiliation</label> <br />
+    <input type="text" name="party" /> <br /> <br />
+
+    <label>State You're From</label> <br />
+    <select name="state">
+      {{> stateOptions}}
+    </select> <br /> <br />
+
+    <div class="actions">
+      <button class="submit btn btn-primary btn-lg">Submit</button>
+    </div>
+  </form>
+</template>
+
+<template name="question">
+  <div class="question">
+    <h3>Which headline appeals to you the most?</h3>
+
+    {{#each headlines}}
+      <div class="radio">
+        <label class="headline">
+          <input type="radio" name="{{../_id}}" value="{{sourceId}}" />
+          <span class="label-text">{{text}}</span>
+        </label>
+      </div>
+    {{/each}}
+  </div>
+</template>
+
+<template name="stateOptions">
+  <option value="AL">Alabama</option>
+  <option value="AK">Alaska</option>
+  <option value="AZ">Arizona</option>
+  <option value="AR">Arkansas</option>
+  <option value="CA">California</option>
+  <option value="CO">Colorado</option>
+  <option value="CT">Connecticut</option>
+  <option value="DE">Delaware</option>
+  <option value="DC">District Of Columbia</option>
+  <option value="FL">Florida</option>
+  <option value="GA">Georgia</option>
+  <option value="HI">Hawaii</option>
+  <option value="ID">Idaho</option>
+  <option value="IL">Illinois</option>
+  <option value="IN">Indiana</option>
+  <option value="IA">Iowa</option>
+  <option value="KS">Kansas</option>
+  <option value="KY">Kentucky</option>
+  <option value="LA">Louisiana</option>
+  <option value="ME">Maine</option>
+  <option value="MD">Maryland</option>
+  <option value="MA">Massachusetts</option>
+  <option value="MI">Michigan</option>
+  <option value="MN">Minnesota</option>
+  <option value="MS">Mississippi</option>
+  <option value="MO">Missouri</option>
+  <option value="MT">Montana</option>
+  <option value="NE">Nebraska</option>
+  <option value="NV">Nevada</option>
+  <option value="NH">New Hampshire</option>
+  <option value="NJ">New Jersey</option>
+  <option value="NM">New Mexico</option>
+  <option value="NY">New York</option>
+  <option value="NC">North Carolina</option>
+  <option value="ND">North Dakota</option>
+  <option value="OH">Ohio</option>
+  <option value="OK">Oklahoma</option>
+  <option value="OR">Oregon</option>
+  <option value="PA">Pennsylvania</option>
+  <option value="RI">Rhode Island</option>
+  <option value="SC">South Carolina</option>
+  <option value="SD">South Dakota</option>
+  <option value="TN">Tennessee</option>
+  <option value="TX">Texas</option>
+  <option value="UT">Utah</option>
+  <option value="VT">Vermont</option>
+  <option value="VA">Virginia</option>
+  <option value="WA">Washington</option>
+  <option value="WV">West Virginia</option>
+  <option value="WI">Wisconsin</option>
+  <option value="WY">Wyoming</option>
+
+  <option value="AS">American Samoa</option>
+  <option value="GU">Guam</option>
+  <option value="MP">Northern Mariana Islands</option>
+  <option value="PR">Puerto Rico</option>
+  <option value="UM">United States Minor Outlying Islands</option>
+  <option value="VI">Virgin Islands</option>
+
+  <option value="AA">Armed Forces Americas</option>
+  <option value="AP">Armed Forces Pacific</option>
+  <option value="AE">Armed Forces Others</option>
+</template>
