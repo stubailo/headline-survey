@@ -18,9 +18,37 @@
   border: 1px #ddd solid;
 
   border-radius: 5px;
+
+  &:hover {
+    border-color: darken(#428bca, 5%);
+  }
 }
 
 :checked + .label-text {
   border-color: darken(#428bca, 5%);
   background-color: lighten(#428bca, 40%)
+}
+
+.question {
+  margin: 40px 0;
+
+  h4 {
+    margin-bottom: 20px;
+
+    small {
+      margin-left: 20px;
+    }
+  }
+}
+
+.demographics {
+  td {
+    padding-bottom: 10px;
+  }
+
+  td:first-child {
+    text-align: right;
+    padding-right: 10px;
+    width: 200px;
+  }
 }

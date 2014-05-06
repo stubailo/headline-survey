@@ -63,8 +63,12 @@ if (Meteor.isClient) {
   });
 
   Template.survey.helpers({
-    questions: function () {
-      return Questions.find();
+    questionsWithIndex: function () {
+      return _.map(Questions.find({}).fetch(), function (question, index) {
+        question.index = index + 1;
+
+        return question;
+      });
     }
   });
 

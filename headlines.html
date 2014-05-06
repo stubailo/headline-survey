@@ -57,25 +57,41 @@
 </template>
 
 <template name="survey">
-  <h1>Headline Survey</h1>
+  <h1>Headlines</h1>
+
+  <p class="lead">We've found that different news websites will post identical news articles syndicated from the Associated Press, but with different headlines.</p>
+
+  <p>Pick which headline you like the most from each set, and we'll match you up with the news source that you liked the most.</p>
+
+  <hr />
 
   <form>
-    {{#each questions}}
+    {{#each questionsWithIndex}}
       {{> question}}
     {{/each}}
 
-    <h3>Help us out with some demographic data!</h3>
+    <hr />
 
-    <label>Age</label> <br />
-    <input type="number" name="age" /> <br /> <br />
+    <h4>Help us do more detailed research with some demographic data!</h4>
 
-    <label>Political Party Affiliation</label> <br />
-    <input type="text" name="party" /> <br /> <br />
+    <table class="demographics table">
+      <tr>
+        <td>Age</td>
+        <td><input type="number" name="age" class="form-control input-sm" /></td>
+      </tr>
 
-    <label>State You're From</label> <br />
-    <select name="state">
-      {{> stateOptions}}
-    </select> <br /> <br />
+      <tr>
+        <td>Political Party Affiliation</td>
+        <td><input type="text" name="party" class="form-control input-sm" /></td>
+      </tr>
+
+      <tr>
+        <td>State You're From</td>
+        <td><select name="state" class="form-control input-sm">{{> stateOptions}}</select></td>
+      </tr>
+    </table>
+
+    <hr />
 
     <div class="actions">
       <button class="submit btn btn-primary btn-lg">Submit</button>
@@ -85,7 +101,10 @@
 
 <template name="question">
   <div class="question">
-    <h3>Which headline appeals to you the most?</h3>
+    <h4>
+      Question {{index}}
+      <small>Pick the headline that appeals to you the most.</small>
+    </h4>
 
     {{#each headlines}}
       <div class="radio">
