@@ -107,10 +107,9 @@ if (Meteor.isClient) {
 
   Template.response.helpers({
     mostPopular: function () {
-      console.log(this);
       var sourceFrequencies = {};
 
-      _.each(this.questions, function (sourceId) {
+      _.each(this.headlines, function (sourceId) {
         if (sourceFrequencies[sourceId]) {
           sourceFrequencies[sourceId] += 1;
         } else {
@@ -123,6 +122,32 @@ if (Meteor.isClient) {
       })[0];
 
       return Sources.findOne({_id: sourceId});
+    },
+    chartBars: function () {
+      var sourceFrequencies = {};
+
+      _.each(this.headlines, function (sourceId) {
+        if (sourceFrequencies[sourceId]) {
+          sourceFrequencies[sourceId] += 1;
+        } else {
+          sourceFrequencies[sourceId] = 1;
+        }
+      });
+
+      var max = _.max(sourceFrequencies);
+      console.log(sourceFrequencies);
+
+      var chartBars = [];
+      _.each(Sources.find({}).fetch(), function (source) {
+        chartBars.push({
+          name: source.name,
+          percent: (sourceFrequencies[source._id] || 0) / max * 100
+        });
+      });
+
+      console.log(chartBars);
+
+      return chartBars;
     }
   });
 }

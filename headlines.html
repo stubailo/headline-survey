@@ -116,7 +116,8 @@
       {{#each headlines}}
         <div class="radio">
           <label class="headline">
-            <input type="radio" name="questions.{{../_id}}" value="{{sourceId}}" />
+            <input type="radio" name="headlines.{{../_id}}"
+              value="{{sourceId}}" />
             <span class="label-text" style="color: {{bgColor ../_id}}">
               {{text}}</span>
           </label>
@@ -127,11 +128,28 @@
 </template>
 
 <template name="response">
-  <h1>Results</h1>
+  <div class="text-center">
+    <h1>Results</h1>
 
-  {{#with mostPopular}}
-    {{name}}
-  {{/with}}
+    {{#with mostPopular}}
+      <p class="lead">Congratulations, you were matched with:</p>
+      <h2>{{name}}</h2>
+    {{/with}}
+
+    <hr />
+
+    <div class="col-sm-4 col-xs-6">
+      {{#each chartBars}}
+        <div class="chart-label">{{name}}: {{percent}}%</div>
+      {{/each}}
+    </div>
+
+    <div class="col-sm-8 col-xs-6">
+      {{#each chartBars}}
+        <div class="chart-bar" style="width: {{percent}}%"></div>
+      {{/each}}
+    </div>
+  </div>
 </template>
 
 <template name="stateOptions">
