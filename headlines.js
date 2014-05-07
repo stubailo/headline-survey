@@ -1,9 +1,9 @@
 Sources = new Meteor.Collection("sources");
 Questions = new Meteor.Collection("questions", {
   transform: function (doc) {
-    doc.headlines = _.select(doc.headlines, function (headline) {
+    doc.headlines = _.shuffle(_.select(doc.headlines, function (headline) {
       return headline.text;
-    });
+    }));
 
     _.map(doc.headlines, function (headline) {
       headline.text = headline.text.toLowerCase();
