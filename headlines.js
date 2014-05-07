@@ -64,6 +64,18 @@ if (Meteor.isClient) {
     }
   });
 
+  Template.question.helpers({
+    bgColor: function (_id) {
+      var numberFromId = _.reduce(_id.split(""), function (sum, char) {
+        return sum + char.charCodeAt(0);
+      }, 0);
+
+      var hue = numberFromId % 360;
+
+      return "hsl(" + hue + ", 60%, 40%)";
+    }
+  });
+
   Template.survey.helpers({
     questionsWithIndex: function () {
       return _.map(Questions.find({}).fetch(), function (question, index) {

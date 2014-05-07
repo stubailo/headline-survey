@@ -106,14 +106,17 @@
       <small>Pick the headline that appeals to you the most.</small>
     </h4>
 
-    {{#each headlines}}
-      <div class="radio">
-        <label class="headline">
-          <input type="radio" name="questions.{{../_id}}" value="{{sourceId}}" />
-          <span class="label-text">{{text}}</span>
-        </label>
-      </div>
-    {{/each}}
+    <div class="headlines clearfix">
+      {{#each headlines}}
+        <div class="radio">
+          <label class="headline">
+            <input type="radio" name="questions.{{../_id}}" value="{{sourceId}}" />
+            <span class="label-text" style="background-color: {{bgColor ../_id}}">
+              {{text}}</span>
+          </label>
+        </div>
+      {{/each}}
+    </div>
   </div>
 </template>
 
@@ -126,6 +129,7 @@
 </template>
 
 <template name="stateOptions">
+  <option value="None">Declined to State</option>
   <option value="AL">Alabama</option>
   <option value="AK">Alaska</option>
   <option value="AZ">Arizona</option>
