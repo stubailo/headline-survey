@@ -1,8 +1,16 @@
 <head>
-  <title>headlines</title>
+  <title>Headlines Survey: Which news source will you prefer?</title>
 </head>
 
 <body>
+  <div id="fb-root"></div>
+  <script>(function(d, s, id) {
+    var js, fjs = d.getElementsByTagName(s)[0];
+    if (d.getElementById(id)) return;
+    js = d.createElement(s); js.id = id;
+    js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&appId=1392579350967002&version=v2.0";
+    fjs.parentNode.insertBefore(js, fjs);
+  }(document, 'script', 'facebook-jssdk'));</script>
 </body>
 
 <template name="layout">
@@ -91,6 +99,20 @@
         <td>State You're From</td>
         <td><select name="state" class="form-control input-sm">{{> stateOptions}}</select></td>
       </tr>
+
+      <tr>
+        <td>Race/Ethnicity</td>
+        <td>
+          <select name="race" class="form-control" >
+            <option>Declined to State</option>
+            <option>White</option>
+            <option>Black or African/American</option>
+            <option>Asian</option>
+            <option>American Indian or Alaskan Native</option>
+            <option>Native Hawaiian or Other Pacific Islander</option>
+          </select>
+        </td>
+      </tr>
     </table>
 
     <hr />
@@ -134,17 +156,23 @@
 
     <hr />
 
-    <div class="col-sm-4 col-xs-6">
-      {{#each chartBars}}
-        <div class="chart-label">{{name}}: {{percent}}%</div>
-      {{/each}}
+    <div class="row">
+      <div class="col-sm-4 col-xs-6">
+        {{#each chartBars}}
+          <div class="chart-label">{{name}}: {{num}}</div>
+        {{/each}}
+      </div>
+
+      <div class="col-sm-8 col-xs-6">
+        {{#each chartBars}}
+          <div class="chart-bar" style="width: {{barWidth}}%"></div>
+        {{/each}}
+      </div>
     </div>
 
-    <div class="col-sm-8 col-xs-6">
-      {{#each chartBars}}
-        <div class="chart-bar" style="width: {{percent}}%"></div>
-      {{/each}}
-    </div>
+    <hr />
+
+    Share this quiz on Facebook: <div class="fb-share-button" data-href="http://headlines.meteor.com/" data-type="button"></div>
   </div>
 </template>
 
