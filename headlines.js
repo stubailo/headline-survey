@@ -124,30 +124,33 @@ if (Meteor.isClient) {
       return Sources.findOne({_id: sourceId});
     },
     chartBars: function () {
-      var sourceFrequencies = {};
+      if (this.headlines) {
+        var sourceFrequencies = {};
 
-      _.each(this.headlines, function (sourceId) {
-        if (sourceFrequencies[sourceId]) {
-          sourceFrequencies[sourceId] += 1;
-        } else {
-          sourceFrequencies[sourceId] = 1;
-        }
-      });
-
-      var max = _.max(sourceFrequencies);
-      console.log(sourceFrequencies);
-
-      var chartBars = [];
-      _.each(Sources.find({}).fetch(), function (source) {
-        chartBars.push({
-          name: source.name,
-          percent: (sourceFrequencies[source._id] || 0) / max * 100
+        _.each(this.headlines, function (sourceId) {
+          if (sourceFrequencies[sourceId]) {
+            sourceFrequencies[sourceId] += 1;
+          } else {
+            sourceFrequencies[sourceId] = 1;
+          }
         });
-      });
 
-      console.log(chartBars);
+        var max = _.max(sourceFrequencies);
+        var numQuestions = _.pairs(this.headlines).length;
 
-      return chartBars;
+        var chartBars = [];
+        _.each(Sources.find({}).fetch(), function (source) {
+          chartBars.push({
+            name: source.name,
+            barWidth: (sourceFrequencies[source._id] || 0) / max * 100,
+            num: (sourceFrequencies[source._id] || 0)
+          });
+        });
+
+        console.log(chartBars);
+
+        return chartBars;
+      }
     }
   });
 }
