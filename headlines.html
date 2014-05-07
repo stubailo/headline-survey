@@ -109,12 +109,20 @@
     {{#each headlines}}
       <div class="radio">
         <label class="headline">
-          <input type="radio" name="{{../_id}}" value="{{sourceId}}" />
+          <input type="radio" name="questions.{{../_id}}" value="{{sourceId}}" />
           <span class="label-text">{{text}}</span>
         </label>
       </div>
     {{/each}}
   </div>
+</template>
+
+<template name="response">
+  <h1>Results</h1>
+
+  {{#with mostPopular}}
+    {{name}}
+  {{/with}}
 </template>
 
 <template name="stateOptions">

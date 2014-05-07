@@ -14,6 +14,8 @@ Questions = new Meteor.Collection("questions", {
   }
 });
 
+Responses = new Meteor.Collection("responses");
+
 if (Meteor.isClient) {
   Session.setDefault("questionIndex", 0);
 
@@ -77,8 +79,38 @@ if (Meteor.isClient) {
       event.preventDefault();
 
       var formData = FormUtils.serializeForm(template.find("form"));
+      formData.createdAt = new Date();
 
-      console.log(formData);
+      Responses.insert(formData, function (error, responseId) {
+        if (error) {
+          // not sure
+
+          alert("There was an error saving your response, sorry.");
+        }
+
+        Router.go("response", {_id: responseId});
+      });
+    }
+  });
+
+  Template.response.helpers({
+    mostPopular: function () {
+      console.log(this);
+      var sourceFrequencies = {};
+
+      _.each(this.questions, function (sourceId) {
+        if (sourceFrequencies[sourceId]) {
+          sourceFrequencies[sourceId] += 1;
+        } else {
+          sourceFrequencies[sourceId] = 1;
+        }
+      });
+
+      var sourceId = _.max(_.pairs(sourceFrequencies), function (pair) {
+        return pair[1];
+      })[0];
+
+      return Sources.findOne({_id: sourceId});
     }
   });
 }
