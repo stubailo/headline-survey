@@ -16,6 +16,14 @@ Questions = new Meteor.Collection("questions", {
 
 Responses = new Meteor.Collection("responses");
 
+Questions.deny({});
+Sources.deny({});
+Responses.allow({
+  insert: function () {
+    return true;
+  }
+});
+
 if (Meteor.isClient) {
   Session.setDefault("questionIndex", 0);
 
