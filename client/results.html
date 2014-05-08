@@ -1,0 +1,30 @@
+<template name="results">
+  <table class="table table-striped">
+    <tbody>
+      <tr>
+        <th>ID</th>
+        <th>Age</th>
+        <th>Party</th>
+        <th>State</th>
+        <th>Race</th>
+
+        {{#each questions}}
+          <th>{{name}}</th>
+        {{/each}}
+      </tr>
+
+      {{#each responses}}
+        <tr>
+          <td>{{_id}}</td>
+          <td>{{age}}</td>
+          <td>{{party}}</td>
+          <td>{{state}}</td>
+          <td>{{race}}</td>
+          {{#each questions}}
+            <td>{{sourceName ..}}</td>
+          {{/each}}
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+</template>

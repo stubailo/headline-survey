@@ -4,6 +4,7 @@ Router.configure({
 
 Router.map(function () {
   this.route("admin");
+  this.route("results");
   this.route("survey", {
     path: "/"
   });
