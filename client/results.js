@@ -1,4 +1,7 @@
 Template.results.helpers({
+  number: function () {
+    return Responses.find({}).count();
+  },
   questions: function () {
     return Questions.find({});
   },
